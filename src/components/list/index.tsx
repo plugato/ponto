@@ -110,7 +110,7 @@ const getInfo = (
       filter: {
         activePlatformUser: true,
         pageInfo: { page: 0, pageSize: '100' },
-        nameSearch: 'MANOEL RICARDO DE AZEVEDO',
+        nameSearch: '',
         sort: { field: null, order: 'DESC' },
       },
     },
