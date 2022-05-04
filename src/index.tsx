@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import MapsContext from './context/maps/context';
+import GlobalContext from './context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+// <React.StrictMode>
 root.render(
-  <React.StrictMode>
+  <GlobalContext>
     <App />
-  </React.StrictMode>
+  </GlobalContext>
 );
 
 // If you want to start measuring performance in your app, pass a function
