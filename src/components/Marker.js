@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const Marker = ({ text, onClick, key }) => {
+  console.log({ text, onClick, key });
   return <Wrapper key={key} alt={text} onClick={onClick} />;
 };
 

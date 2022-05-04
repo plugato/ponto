@@ -5,7 +5,9 @@ type UserType = {
   geolocation: {
     lat: number;
     lng: number;
-  };
+    id: string;
+  }[];
+  token: string;
 };
 
 //Tipando as Props do contexto
@@ -17,7 +19,8 @@ type PropsUserContext = {
 //Valor default do contexto
 const DEFAULT_VALUE = {
   state: {
-    geolocation: { lat: -23.3829291, lng: -51.9262769 },
+    geolocation: [{ lat: -23.3829291, lng: -51.9262769, id: '1' }],
+    token: '',
   },
   setState: () => {}, //função de inicialização
 };

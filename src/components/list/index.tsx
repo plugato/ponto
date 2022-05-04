@@ -4,7 +4,7 @@ import MapsContext from '../../context/maps/context';
 
 const List = () => {
   const [data, setData] = useState([]);
-  const { setState: setGlobalState } = useContext(MapsContext);
+  const { setState: setGlobalState, state } = useContext(MapsContext);
   const separeteItem = (data: any): any => {
     //data.reduce();
     const data2 = [...data];
@@ -23,12 +23,6 @@ const List = () => {
 
       return acc;
     }, []);
-    // data2.reduce((acc: any, curr: any) => {
-    //   if (acc.length === 0) {
-    //     acc.push([]);
-    //   }
-    //   //return acc;
-    // });
 
     return arr;
   };
@@ -40,8 +34,10 @@ const List = () => {
           {value.map((item: any) => (
             <li
               onClick={(value: any) => {
-                setGlobalState({ ...item });
-                console.log(value.target.innerText);
+                const arr = [...state.geolocation];
+                arr.push(item);
+
+                setGlobalState({ ...state, geolocation: arr });
               }}
             >
               {item.timeEvent}
@@ -52,23 +48,39 @@ const List = () => {
     );
   };
   useEffect(() => {
-    getInfo(setData);
-  }, []);
-  function aaaaa() {
+    getInfo(setData, state?.token);
+  }, [state?.token]);
+  function aaaaa(callBack: any) {
     const separete = separeteItem(data);
-    //console.log(separete);
 
-    const obj = Object.assign({}, separete);
-
-    return Object.entries(separete).map(Item);
+    return Object.entries(separete).map<JSX.Element>(callBack);
   }
-  return <div>{aaaaa()}</div>;
+
+  const selectAll = () => {
+    const arr: any[] = [];
+    aaaaa(([key, value]: any) => {
+      value.map((item: any) => {
+        arr.push(item);
+      });
+    });
+    setGlobalState({ ...state, geolocation: arr });
+  };
+
+  return (
+    <>
+      <div>{aaaaa(Item)}</div>
+      <button onClick={selectAll}>ALL</button>
+    </>
+  );
 };
 
-const getInfo = (setData: {
-  (value: React.SetStateAction<never[]>): void;
-  (arg0: any): void;
-}) => {
+const getInfo = (
+  setData: {
+    (value: React.SetStateAction<never[]>): void;
+    (arg0: any): void;
+  },
+  token: string
+) => {
   const options = {
     method: 'POST',
     url: 'https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/hcm/pontomobile/queries/clockingEventByActiveUserQuery',
@@ -76,7 +88,7 @@ const getInfo = (setData: {
       authority: 'platform.senior.com.br',
       accept: 'application/json, text/plain, */*',
       'accept-language': 'pt-PT,pt;q=0.9,en-US;q=0.8,en;q=0.7,pt-BR;q=0.6',
-      authorization: 'bearer j9uTSweyZTfXLCTVULo46bB5ycuus78R',
+      authorization: `bearer ${token}`,
       'cache-control': 'no-cache',
       'content-type': 'application/json',
       cookie:
@@ -97,7 +109,7 @@ const getInfo = (setData: {
     data: {
       filter: {
         activePlatformUser: true,
-        pageInfo: { page: 0, pageSize: '10' },
+        pageInfo: { page: 0, pageSize: '100' },
         nameSearch: 'MANOEL RICARDO DE AZEVEDO',
         sort: { field: null, order: 'DESC' },
       },
