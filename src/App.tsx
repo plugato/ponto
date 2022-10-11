@@ -13,9 +13,7 @@ export const App = () => (
   <ChakraProvider theme={theme}>
   <Box textAlign="center" fontSize="xl"> 
       <Admin loginPage={Login} authProvider={authProvider} dashboard={Home} >  
-       {/* <Resource name="customers" {...List} /> 
-       <Resource name="customers2" {...List} />  */}
-      
+     
       </Admin>
     </Box>
   </ChakraProvider>
