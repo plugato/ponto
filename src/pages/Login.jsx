@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { useLogin, useNotify } from 'react-admin'
-import { loginSenior } from '../puppetter'
+ 
 
 const Login = () => {
   const { toggleColorMode } = useColorMode()
@@ -29,8 +29,7 @@ const Login = () => {
             login({ email, password }).catch(() =>
                 notify('Invalid email or password')
             ) 
-          //const token = await loginSenior(email, password)
-          // console.log({ email, password, token })
+           
         }}>
         <Flex flexDirection="column" bg={formBackground} p={12} borderRadius={8} boxShadow="lg">
           <Heading mb={6}>Log In</Heading>
