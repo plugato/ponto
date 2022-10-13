@@ -1,5 +1,5 @@
  import { AuthProvider } from 'react-admin';
-import { loginSenior } from '../puppetter';
+import { loginSenior } from '../login';
 
  
 const authProvider:AuthProvider = {
