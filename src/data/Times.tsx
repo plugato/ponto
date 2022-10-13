@@ -36,7 +36,7 @@ const getInfo = (
     data: {
       filter: {
         activePlatformUser: true,
-        pageInfo: { page: 0, pageSize: '100' },
+        pageInfo: { page: 0, pageSize: '5000' },
         nameSearch: '',
         sort: { field: null, order: 'DESC' },
       },
